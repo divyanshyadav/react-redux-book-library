@@ -1,6 +1,6 @@
 # react-redux-book-library
 
-Book library created using react-redux
+Book library created using react and redux.
 
 ## Available Scripts
 
