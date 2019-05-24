@@ -9,11 +9,21 @@ class Textfield extends Component {
     };
 
     render() {
-        const { label, name, model, ...rest } = this.props;
+        const { label, name, model, onChange, style, ...rest } = this.props;
         return (
-            <div>
-                <div>{label}</div>
-                <input value={model[name]} onChange={this.onChangeHandler} type="text" {...rest} />
+            <div style={style}>
+                {label && <div>{label}</div>}
+                <input
+                    value={model[name]}
+                    onChange={e => {
+                        if (onChange) {
+                            onChange(e.target.value);
+                        }
+                        this.onChangeHandler(e);
+                    }}
+                    type="text"
+                    {...rest}
+                />
             </div>
         );
     }
@@ -22,7 +32,7 @@ class Textfield extends Component {
 Textfield.propTypes = {
     model: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
 };
 
 export default Textfield;

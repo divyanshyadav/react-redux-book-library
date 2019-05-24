@@ -15,5 +15,9 @@ const books = (state = [], action) => {
 
 export default books;
 
+export const getSearchedBooks = (state, searchedValue = '') => state.filter((book) => {
+    const details = [book.name.toLocaleLowerCase(), book.author.toLocaleLowerCase()];
+    return details.join().includes(searchedValue.toLocaleLowerCase());
+});
 export const getAllBooks = state => state;
 export const getBook = (state, id) => state.find(b => b.id === id);

@@ -10,7 +10,7 @@ import Button from '../components/Button';
 import BookModel from '../models/Book';
 
 class Book extends React.Component {
-    handleSubmit = e => {
+    handleSubmit = () => {
         const { addBook, history, model, updateBook, isUpdate } = this.props;
 
         if (isUpdate) {

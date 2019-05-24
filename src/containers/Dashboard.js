@@ -1,38 +1,63 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import actions from '../actions';
-import { getAllBooks } from '../reducers';
+import { getAllBooks, getSearchedBooks } from '../reducers';
 
 import Button from '../components/Button';
+import Textfield from '../components/Textfield';
+import SearchBox from '../components/SearchBox';
 
-const Dashboard = ({ books, ...rest }) => (
-    <div>
-        <Link to="/book">
-            <Button>Add Book</Button>
-        </Link>
-        <ul>
-            {books.map(book => (
-                <li key={book.id}>
-                    <pre>{JSON.stringify(book, null, 4)}</pre>
-                    <Link to={`/book/${book.id}`}>
-                        <Button>Edit</Button>
-                    </Link>
-                    <Button onClick={() => rest.deleteBook(book.id)}>Delete</Button>
-                </li>
-            ))}
-        </ul>
-    </div>
-);
+class Dashboard extends Component {
+    state = {
+        books: [],
+    };
+    searchModel = { search: '' };
+    componentDidMount() {
+        this.setState({
+            books: this.props.allBooks,
+        });
+    }
+    render() {
+        const { deleteBook } = this.props;
+        const { books } = this.state;
+        return (
+            <div>
+                <Link to="/book">
+                    <Button>Add Book</Button>
+                </Link>
+                <SearchBox
+                    placeholder={'Search here(name/author)'}
+                    onSearchClick={value => {
+                        this.setState({
+                            books: getSearchedBooks(this.props.allBooks, value),
+                        });
+                    }}
+                />
+                <ul>
+                    {books.map(book => (
+                        <li key={book.id}>
+                            <pre>{JSON.stringify(book, null, 4)}</pre>
+                            <Link to={`/book/${book.id}`}>
+                                <Button>Edit</Button>
+                            </Link>
+                            <Button onClick={() => deleteBook(book.id)}>Delete</Button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
+}
 
 Dashboard.propTypes = {
     books: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({
-    books: getAllBooks(state),
+    allBooks: getAllBooks(state),
 });
 
 export default connect(
