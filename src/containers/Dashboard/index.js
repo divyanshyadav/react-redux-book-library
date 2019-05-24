@@ -36,7 +36,8 @@ class Dashboard extends Component {
         const { deleteBook, history } = this.props;
         const { books } = this.state;
         return (
-            <div>
+            <div className="dashboard__container">
+                <h1>Book Library</h1>
                 <Link to="/book">
                     <Button className="dashboard__add-button">Add Book</Button>
                 </Link>

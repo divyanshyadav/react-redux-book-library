@@ -10,10 +10,11 @@ const Button = ({ children, className, ...rest }) => (
 
 Button.defaultProps = {
     className: '',
+    children: null,
 };
 
 Button.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     className: PropTypes.string,
 };
 
