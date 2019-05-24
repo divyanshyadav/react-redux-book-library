@@ -1,0 +1,15 @@
+.book-screen__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.book-screen__container > * {
+  margin-bottom: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+  .book-screen__container {
+    width: 46%;
+  }
+}

@@ -1,0 +1,14 @@
+.dashboard__add-button {
+  margin-bottom: 1em;
+}
+
+.dashboard__search {
+  margin-bottom: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+  .dashboard__search {
+    width: 60%;
+    text-align: center;
+  }
+}

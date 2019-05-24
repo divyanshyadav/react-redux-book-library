@@ -12,7 +12,7 @@ class Textfield extends Component {
     render() {
         const { label, name, model, onChange, ...rest } = this.props;
         return (
-            <div>
+            <>
                 {label && <div>{label}</div>}
                 <input
                     className="textfield__text-input"
@@ -26,7 +26,7 @@ class Textfield extends Component {
                     type="text"
                     {...rest}
                 />
-            </div>
+            </>
         );
     }
 }

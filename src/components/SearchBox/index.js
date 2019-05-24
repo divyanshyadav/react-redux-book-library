@@ -20,10 +20,11 @@ class SearchBox extends Component {
     };
 
     render() {
-        const { placeholder } = this.props;
+        const { placeholder, className = '' } = this.props;
         return (
-            <div className="search-box__container">
+            <div className={'search-box__container ' + className}>
                 <Textfield
+                    style={{ marginRight: '0.7em', flex: 1 }}
                     name="search"
                     placeholder={placeholder}
                     model={this.searchModel}
