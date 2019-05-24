@@ -1,0 +1,15 @@
+{
+  "env": {
+    "jest": true,
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": "airbnb",
+  "rules": {
+    "indent": ["error", 4],
+    "react/jsx-indent": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-indent-props": "off"
+  }
+}
