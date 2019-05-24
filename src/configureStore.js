@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import reducer from './reducers';
+import * as localStorage from './utils/localStorage';
 
 const configureStore = () => {
     const middlewares = [];
@@ -8,8 +9,12 @@ const configureStore = () => {
     if (process.env.NODE_ENV !== 'production') {
         middlewares.push(logger);
     }
-
-    return createStore(reducer, applyMiddleware(...middlewares));
+    const persistentState = localStorage.get('book_library');
+    const store = createStore(reducer, persistentState, applyMiddleware(...middlewares));
+    store.subscribe(() => {
+        localStorage.set('book_library', store.getState());
+    });
+    return store;
 };
 
 export default configureStore;
