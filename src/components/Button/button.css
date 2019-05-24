@@ -1,0 +1,6 @@
+.button__container {
+  font-weight: bold;
+  font-size: 0.8em;
+  cursor: pointer;
+  border-radius: 4px;
+}

@@ -1,3 +1,4 @@
+import './textfield.css';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,11 +10,12 @@ class Textfield extends Component {
     };
 
     render() {
-        const { label, name, model, onChange, style, ...rest } = this.props;
+        const { label, name, model, onChange, ...rest } = this.props;
         return (
-            <div style={style}>
+            <div>
                 {label && <div>{label}</div>}
                 <input
+                    className="textfield__text-input"
                     value={model[name]}
                     onChange={e => {
                         if (onChange) {

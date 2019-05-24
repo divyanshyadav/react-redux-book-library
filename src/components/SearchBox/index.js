@@ -1,14 +1,15 @@
+import './searchBox.css';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Textfield from './Textfield';
-import Button from './Button';
+import Textfield from '../Textfield';
+import Button from '../Button';
 
 class SearchBox extends Component {
     searchModel = { search: '' };
 
     handleKeyPress = target => {
-        if (target.charCode == 13) {
+        if (target.charCode === 13) {
             this.onSubmit();
         }
     };
@@ -21,13 +22,12 @@ class SearchBox extends Component {
     render() {
         const { placeholder } = this.props;
         return (
-            <div>
+            <div className="search-box__container">
                 <Textfield
-                    onKeyPress={this.handleKeyPress}
                     name="search"
                     placeholder={placeholder}
                     model={this.searchModel}
-                    style={{ display: 'inline' }}
+                    onKeyPress={this.handleKeyPress}
                 />
                 <Button onClick={this.onSubmit}>Search</Button>
             </div>

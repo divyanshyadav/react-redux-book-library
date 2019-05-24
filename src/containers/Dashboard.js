@@ -7,7 +7,6 @@ import actions from '../actions';
 import { getAllBooks, getSearchedBooks } from '../reducers';
 
 import Button from '../components/Button';
-import Textfield from '../components/Textfield';
 import SearchBox from '../components/SearchBox';
 
 class Dashboard extends Component {
@@ -26,7 +25,7 @@ class Dashboard extends Component {
         return (
             <div>
                 <Link to="/book">
-                    <Button>Add Book</Button>
+                    <Button style={{ marginBottom: 0 }}>Add Book</Button>
                 </Link>
                 <SearchBox
                     placeholder={'Search here(name/author)'}
@@ -53,7 +52,7 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    books: PropTypes.array.isRequired,
+    allBooks: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({
