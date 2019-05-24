@@ -5,7 +5,7 @@ const books = (state = [], action) => {
     case 'ADD_BOOK':
         return [...state, book(undefined, action)];
     case 'UPDATE_BOOK':
-        return [...state.filter(b => b.id !== action.id), book(undefined, action)];
+        return state.map(b => book(b, action));
     case 'DELETE_BOOK':
         return state.filter(b => b.id !== action.id);
     default:
@@ -16,3 +16,4 @@ const books = (state = [], action) => {
 export default books;
 
 export const getAllBooks = state => state;
+export const getBook = (state, id) => state.find(b => b.id === id);
