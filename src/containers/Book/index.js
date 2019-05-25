@@ -10,12 +10,19 @@ import { getBook } from '../../reducers';
 import Textfield from '../../components/Textfield';
 import Button from '../../components/Button';
 import BookModel from '../../models/Book';
+import validators from '../../utils/validators';
 
 class Book extends React.Component {
+    inputRefs = {};
+
     handleSubmit = () => {
         const {
             model, addBook, updateBook, isUpdate, history,
         } = this.props;
+
+        if (!this.validate()) {
+            return;
+        }
 
         if (isUpdate) {
             updateBook(model);
@@ -26,6 +33,18 @@ class Book extends React.Component {
         history.push('/');
     };
 
+    validate = () => {
+        let passed = true;
+        const inputs = Object.values(this.inputRefs);
+        for (let i = 0; i < inputs.length; i += 1) {
+            const input = inputs[i];
+            if (!input.validate()) {
+                passed = false;
+            }
+        }
+        return passed;
+    };
+
     render() {
         const { model, isUpdate } = this.props;
         const submitButtonText = isUpdate ? 'Update' : 'Add';
@@ -33,15 +52,53 @@ class Book extends React.Component {
         return (
             <div className="book-screen__container">
                 <h1>Book Details</h1>
-                <Textfield label="Name" name="name" model={model} placeholder="The Alchemist" />
-                <Textfield label="Author" name="author" model={model} placeholder="Paulo Coelho" />
                 <Textfield
-                    label="Description"
+                    ref={(ref) => {
+                        if (ref) {
+                            this.inputRefs[ref.props.name] = ref;
+                        }
+                    }}
+                    name="name"
+                    model={model}
+                    label="Name"
+                    placeholder="The Alchemist"
+                    validators={[validators.required]}
+                />
+                <Textfield
+                    ref={(ref) => {
+                        if (ref) {
+                            this.inputRefs[ref.props.name] = ref;
+                        }
+                    }}
+                    name="author"
+                    model={model}
+                    label="Author"
+                    placeholder="Paulo Coelho"
+                    validators={[validators.required]}
+                />
+                <Textfield
+                    ref={(ref) => {
+                        if (ref) {
+                            this.inputRefs[ref.props.name] = ref;
+                        }
+                    }}
                     name="description"
                     model={model}
+                    label="Description"
+                    type="textarea"
                     placeholder="The Alchemist by Paulo Coelho continues to change the lives of its readers forever. With more than two million copies sold around the world, The Alchemist has established itself as a modern classic, universally admired"
                 />
-                <Textfield label="Count" name="count" model={model} type="number" />
+                <Textfield
+                    ref={(ref) => {
+                        if (ref) {
+                            this.inputRefs[ref.props.name] = ref;
+                        }
+                    }}
+                    name="count"
+                    model={model}
+                    type="number"
+                    label="Count"
+                />
                 <Button onClick={this.handleSubmit}>{submitButtonText}</Button>
             </div>
         );

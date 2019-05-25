@@ -4,7 +4,8 @@
   margin: 0 auto;
 }
 
-.book-screen__container > input {
+.book-screen__container > input,
+textarea {
   margin-bottom: 1em;
 }
 
