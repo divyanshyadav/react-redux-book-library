@@ -1,6 +1,7 @@
 import './textfield.css';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getRandomColor from '../../utils/randomLightColor';
 
 class Textfield extends Component {
     state = {
@@ -48,6 +49,7 @@ class Textfield extends Component {
             className: 'textfield__text-input',
             value: model[name],
             onChange: this.onChangeHandler,
+            style: { outlineColor: `${getRandomColor()}` },
         };
 
         let textarea = null;
