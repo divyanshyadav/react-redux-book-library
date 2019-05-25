@@ -15,6 +15,6 @@ export const set = (key, value) => {
         const serializedData = JSON.stringify(value);
         localStorage.setItem(key, serializedData);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
     }
 };

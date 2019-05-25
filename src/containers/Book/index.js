@@ -1,10 +1,11 @@
 import './book.css';
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { getBook } from '../../reducers';
 import actions from '../../actions';
+import { getBook } from '../../reducers';
 
 import Textfield from '../../components/Textfield';
 import Button from '../../components/Button';
@@ -12,7 +13,9 @@ import BookModel from '../../models/Book';
 
 class Book extends React.Component {
     handleSubmit = () => {
-        const { addBook, history, model, updateBook, isUpdate } = this.props;
+        const {
+            model, addBook, updateBook, isUpdate, history,
+        } = this.props;
 
         if (isUpdate) {
             updateBook(model);
@@ -52,6 +55,16 @@ const mapStateToProps = (state, { history, match: { params } }) => {
         model: book || new BookModel(),
         history,
     };
+};
+
+Book.propTypes = {
+    isUpdate: PropTypes.bool.isRequired,
+    model: PropTypes.shape(BookModel).isRequired,
+    updateBook: PropTypes.func.isRequired,
+    addBook: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default withRouter(

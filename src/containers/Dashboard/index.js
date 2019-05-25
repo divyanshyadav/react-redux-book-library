@@ -1,11 +1,13 @@
 import './dashboard.css';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
 
 import actions from '../../actions';
 import { getSearchedBooks } from '../../reducers';
+
+import BookModel from '../../models/Book';
 
 import BookList from '../../components/BookList';
 import Button from '../../components/Button';
@@ -13,7 +15,7 @@ import SearchBox from '../../components/SearchBox';
 
 const Dashboard = (props) => {
     const {
-        deleteBook, history, books, searchedText,
+        books, searchedText, deleteBook, history,
     } = props;
     return (
         <div className="dashboard__container">
@@ -41,15 +43,23 @@ const Dashboard = (props) => {
 const mapStateToProps = (state, { history, location }) => {
     const searchedText = new URLSearchParams(location.search).get('search') || '';
     return {
-        location,
         books: getSearchedBooks(state, searchedText),
-        history,
         searchedText,
+        history,
     };
 };
 
+Dashboard.defaultProps = {
+    searchedText: '',
+};
+
 Dashboard.propTypes = {
-    books: PropTypes.array.isRequired,
+    books: PropTypes.arrayOf(PropTypes.shape(BookModel)).isRequired,
+    searchedText: PropTypes.string,
+    deleteBook: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default withRouter(

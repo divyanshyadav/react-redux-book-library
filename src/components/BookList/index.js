@@ -2,6 +2,7 @@ import './bookList.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
+import BookModel from '../../models/Book';
 
 const BookList = ({ books, onBookDeleteClick, onBookEditClick }) => (
     <div className="book-list__container">
@@ -25,7 +26,7 @@ const BookList = ({ books, onBookDeleteClick, onBookEditClick }) => (
 );
 
 BookList.propTypes = {
-    books: PropTypes.array.isRequired,
+    books: PropTypes.arrayOf(PropTypes.shape(BookModel)).isRequired,
     onBookDeleteClick: PropTypes.func.isRequired,
     onBookEditClick: PropTypes.func.isRequired,
 };
