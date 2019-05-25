@@ -34,15 +34,15 @@ class Book extends React.Component {
     };
 
     validate = () => {
-        let passed = true;
         const inputs = Object.values(this.inputRefs);
         for (let i = 0; i < inputs.length; i += 1) {
             const input = inputs[i];
             if (!input.validate()) {
-                passed = false;
+                input.focus();
+                return false;
             }
         }
-        return passed;
+        return true;
     };
 
     render() {

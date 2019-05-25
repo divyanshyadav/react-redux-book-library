@@ -31,6 +31,10 @@ class Textfield extends Component {
         return true;
     };
 
+    focus = () => {
+        this.textInput.focus();
+    };
+
     render() {
         const {
             model, type, label, name, onChange, ...rest
@@ -38,6 +42,9 @@ class Textfield extends Component {
         const { errorMessage } = this.state;
 
         const commonProps = {
+            ref: (ref) => {
+                this.textInput = ref;
+            },
             className: 'textfield__text-input',
             value: model[name],
             onChange: this.onChangeHandler,

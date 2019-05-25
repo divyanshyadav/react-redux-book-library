@@ -3,7 +3,7 @@ import book from './book';
 const books = (state = [], action) => {
     switch (action.type) {
     case 'ADD_BOOK':
-        return [...state, book(undefined, action)];
+        return [book(undefined, action), ...state];
     case 'UPDATE_BOOK':
         return state.map(b => book(b, action));
     case 'DELETE_BOOK':

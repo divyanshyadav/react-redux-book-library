@@ -10,9 +10,9 @@ const BookList = ({ books, onBookDeleteClick, onBookEditClick }) => (
             <div className="book-list__book" key={book.id}>
                 <div>
                     <h2>
-                        <u>{book.name}</u>
+                        <u>{`Title: ${book.name}`}</u>
                     </h2>
-                    <h3>{`Author: ${book.author}`}</h3>
+                    <h4>{`Author: ${book.author}`}</h4>
                     <p className="book-list__book__description">{book.description}</p>
                     <h5>{`Count: ${book.count}`}</h5>
                 </div>
