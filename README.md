@@ -1,6 +1,6 @@
 # Book library
 
-Book library created using react and redux.
+Offline Book library created using react and redux.
 
 ## Getting started
 
