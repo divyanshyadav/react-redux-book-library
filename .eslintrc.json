@@ -11,5 +11,6 @@
     "react/jsx-indent": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-indent-props": "off"
-  }
+  },
+  "parser": "babel-eslint"
 }

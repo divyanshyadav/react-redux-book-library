@@ -6,8 +6,9 @@ import Textfield from '../Textfield';
 import Button from '../Button';
 
 class SearchBox extends Component {
-    constructor() {
-        this.searchModel = { search: '' };
+    constructor(props) {
+        super(props);
+        this.searchModel = { search: props.value || '' };
     }
 
     onSubmit = () => {
@@ -15,7 +16,7 @@ class SearchBox extends Component {
         onSearchClick(this.searchModel.search);
     };
 
-    handleKeyPress = target => {
+    handleKeyPress = (target) => {
         if (target.charCode === 13) {
             this.onSubmit();
         }
@@ -24,7 +25,7 @@ class SearchBox extends Component {
     render() {
         const { placeholder, className = '' } = this.props;
         return (
-            <div className={'search-box__container ' + className}>
+            <div className={`search-box__container ${className}`}>
                 <Textfield
                     style={{ marginRight: '0.7em', flex: 1 }}
                     name="search"
@@ -39,11 +40,16 @@ class SearchBox extends Component {
 }
 
 SearchBox.defaultProps = {
+    className: '',
+    value: '',
     placeholder: 'Search here!!',
 };
 
 SearchBox.propTypes = {
+    className: PropTypes.string,
     onSearchClick: PropTypes.func.isRequired,
+    value: PropTypes.string,
+    placeholder: PropTypes.string,
 };
 
 export default SearchBox;
