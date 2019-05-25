@@ -62,7 +62,7 @@ class Book extends React.Component {
                     model={model}
                     label="Name"
                     placeholder="The Alchemist"
-                    validators={[validators.required]}
+                    validators={[validators.required, validators.max50Char]}
                 />
                 <Textfield
                     ref={(ref) => {
@@ -74,7 +74,7 @@ class Book extends React.Component {
                     model={model}
                     label="Author"
                     placeholder="Paulo Coelho"
-                    validators={[validators.required]}
+                    validators={[validators.required, validators.max50Char]}
                 />
                 <Textfield
                     ref={(ref) => {
@@ -87,6 +87,7 @@ class Book extends React.Component {
                     label="Description"
                     type="textarea"
                     placeholder="The Alchemist by Paulo Coelho continues to change the lives of its readers forever. With more than two million copies sold around the world, The Alchemist has established itself as a modern classic, universally admired"
+                    validators={[validators.max500Char]}
                 />
                 <Textfield
                     ref={(ref) => {

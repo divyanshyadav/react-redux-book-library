@@ -76,7 +76,7 @@ Textfield.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
     onChange: PropTypes.func,
-    validators: PropTypes.instanceOf(Array),
+    validators: PropTypes.arrayOf(PropTypes.func),
 };
 
 export default Textfield;
