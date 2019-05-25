@@ -3,11 +3,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 import BookModel from '../../models/Book';
+import randomLightColor from '../../utils/randomLightColor';
 
 const BookList = ({ books, onBookDeleteClick, onBookEditClick }) => (
     <div className="book-list__container">
         {books.map(book => (
-            <div className="book-list__book" key={book.id}>
+            <div
+                className="book-list__book"
+                key={book.id}
+                style={{ backgroundColor: `${randomLightColor()}` }}
+            >
                 <div>
                     <h2>
                         <u>{`Title: ${book.name}`}</u>
