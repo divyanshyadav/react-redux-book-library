@@ -6,17 +6,19 @@ import Textfield from '../Textfield';
 import Button from '../Button';
 
 class SearchBox extends Component {
-    searchModel = { search: '' };
+    constructor() {
+        this.searchModel = { search: '' };
+    }
+
+    onSubmit = () => {
+        const { onSearchClick } = this.props;
+        onSearchClick(this.searchModel.search);
+    };
 
     handleKeyPress = target => {
         if (target.charCode === 13) {
             this.onSubmit();
         }
-    };
-
-    onSubmit = () => {
-        const { onSearchClick } = this.props;
-        onSearchClick(this.searchModel.search);
     };
 
     render() {

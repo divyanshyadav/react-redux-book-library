@@ -66,13 +66,13 @@ const mapStateToProps = (state, { history }) => ({
     history,
 });
 
+Dashboard.propTypes = {
+    allBooks: PropTypes.array.isRequired,
+};
+
 export default withRouter(
     connect(
         mapStateToProps,
         actions,
     )(Dashboard),
 );
-
-Dashboard.propTypes = {
-    allBooks: PropTypes.array.isRequired,
-};

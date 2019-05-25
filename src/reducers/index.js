@@ -15,8 +15,8 @@ const books = (state = [], action) => {
 
 export default books;
 
-export const getSearchedBooks = (state, searchedValue = '') => state.filter((book) => {
-    const details = [book.name.toLocaleLowerCase(), book.author.toLocaleLowerCase()];
+export const getSearchedBooks = (state, searchedValue = '') => state.filter((b) => {
+    const details = [b.name.toLocaleLowerCase(), b.author.toLocaleLowerCase()];
     return details.join().includes(searchedValue.toLocaleLowerCase());
 });
 export const getAllBooks = state => state;

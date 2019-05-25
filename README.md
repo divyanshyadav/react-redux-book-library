@@ -1,15 +1,18 @@
-# react-redux-book-library
+# Book library
 
 Book library created using react and redux.
 
-## Available Scripts
+## Getting started
 
-In the project directory, you can run:
+### Before all
+
+Run the below command to install all the project dependencies.
+
+### `npm install`
+
+Then in the project directory, you can run:
 
 ### `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
