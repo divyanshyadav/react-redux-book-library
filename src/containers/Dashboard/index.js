@@ -51,7 +51,7 @@ class Dashboard extends Component {
 const mapStateToProps = (state, { history, location }) => {
     const searchedText = new URLSearchParams(location.search).get('search') || '';
     return {
-        books: getAllBooks(state),
+        books: getAllBooks(state).reverse(),
         searchedText,
         history,
     };

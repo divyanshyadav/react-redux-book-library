@@ -17,6 +17,7 @@ client.interceptors.request.use(
 client.interceptors.response.use(
     response => response.data,
     (error) => {
+        alert(`API Error: ${error.message}`);
         console.error(error);
         return Promise.reject(error);
     },
