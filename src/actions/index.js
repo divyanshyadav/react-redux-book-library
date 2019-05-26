@@ -1,19 +1,43 @@
-const addBook = details => ({
-    type: 'ADD_BOOK',
-    details,
+import bookApi from '../api/model/bookClient';
+
+const fetchBooks = searchText => dispatch => bookApi.search(searchText).then((response) => {
+    dispatch({
+        type: 'FETCH_BOOK_SUCCESS',
+        response,
+    });
 });
 
-const updateBook = details => ({
-    type: 'UPDATE_BOOK',
-    details,
+const fetchBook = id => dispatch => bookApi.getById(id).then((response) => {
+    dispatch({
+        type: 'FETCH_BOOK_BY_ID_SUCCESS',
+        response,
+    });
 });
 
-const deleteBook = id => ({
-    type: 'DELETE_BOOK',
-    id,
+const addBook = details => dispatch => bookApi.create(details).then((response) => {
+    dispatch({
+        type: 'ADD_BOOK',
+        response,
+    });
+});
+
+const updateBook = details => dispatch => bookApi.updateById(details.id, details).then((response) => {
+    dispatch({
+        type: 'UPDATE_TODO',
+        response,
+    });
+});
+
+const deleteBook = id => dispatch => bookApi.deleteById(id).then((response) => {
+    dispatch({
+        type: 'DELETE_BOOK',
+        response,
+    });
 });
 
 export default {
+    fetchBook,
+    fetchBooks,
     addBook,
     updateBook,
     deleteBook,

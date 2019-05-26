@@ -1,13 +1,23 @@
-import book from './book';
+/* eslint-disable no-case-declarations */
 
-const books = (state = [], action) => {
+const books = (state = {}, action) => {
     switch (action.type) {
+    case 'FETCH_BOOK_SUCCESS':
+        return action.response.reduce((acc, next) => {
+            acc[next.id] = next;
+            return acc;
+        }, {});
+    case 'FETCH_BOOK_BY_ID_SUCCESS':
     case 'ADD_BOOK':
-        return [book(undefined, action), ...state];
     case 'UPDATE_BOOK':
-        return state.map(b => book(b, action));
+        return {
+            [action.response.id]: action.response,
+            ...state,
+        };
     case 'DELETE_BOOK':
-        return state.filter(b => b.id !== action.id);
+        const nextState = { ...state };
+        delete nextState[action.response.id];
+        return nextState;
     default:
         return state;
     }
@@ -15,9 +25,5 @@ const books = (state = [], action) => {
 
 export default books;
 
-export const getSearchedBooks = (state, searchedValue = '') => state.filter((b) => {
-    const details = [b.name.toLocaleLowerCase(), b.author.toLocaleLowerCase()];
-    return details.join().includes(searchedValue.toLocaleLowerCase());
-});
-export const getAllBooks = state => state;
-export const getBook = (state, id) => state.find(b => b.id === id);
+export const getAllBooks = state => Object.values(state);
+export const getBook = (state, id) => state[id];
