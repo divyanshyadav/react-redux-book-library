@@ -15,6 +15,13 @@ import validators from '../../utils/validators';
 class Book extends React.Component {
     inputRefs = {};
 
+    componentDidMount() {
+        const { fetchBook, bookId } = this.props;
+        if (bookId) {
+            fetchBook(bookId);
+        }
+    }
+
     handleSubmit = () => {
         const {
             model, addBook, updateBook, isUpdate, history,
@@ -25,12 +32,10 @@ class Book extends React.Component {
         }
 
         if (isUpdate) {
-            updateBook(model);
+            updateBook(model).then(() => history.push('/'));
         } else {
-            addBook(model);
+            addBook(model).then(() => history.push('/'));
         }
-
-        history.push('/');
     };
 
     validate = () => {
@@ -112,7 +117,12 @@ const mapStateToProps = (state, { history, match: { params } }) => {
         isUpdate: book !== undefined,
         model: book || new BookModel(),
         history,
+        bookId: params.id,
     };
+};
+
+Book.defaultProps = {
+    bookId: null,
 };
 
 Book.propTypes = {
@@ -120,6 +130,8 @@ Book.propTypes = {
     model: PropTypes.shape(BookModel).isRequired,
     updateBook: PropTypes.func.isRequired,
     addBook: PropTypes.func.isRequired,
+    fetchBook: PropTypes.func.isRequired,
+    bookId: PropTypes.string,
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
