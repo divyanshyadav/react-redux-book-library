@@ -5,7 +5,7 @@ Book library created using react and redux.
 Before running the app, clone the backend(APIs) repository from <a href='https://github.com/divyanshyadav/express-book-library-api.git'>
 express-book-library-api</a> and follow the instructions provided in the README.md file
 
-<b>Note:</b> Also to run this app without backend(With <b>localstorage</b> only) switch to <b>branch: `local-app`</b>.
+<b>Note:</b> To run this app without backend(With <b>localstorage</b> only) switch to <b>branch: `local-app`</b>.
 
 ## Getting started
 
