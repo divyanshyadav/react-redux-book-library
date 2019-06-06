@@ -21,11 +21,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: scroll;
+  /* overflow: scroll; */
   flex: 200px;
 }
 
 .book-list__book__description {
   max-height: 6em;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
