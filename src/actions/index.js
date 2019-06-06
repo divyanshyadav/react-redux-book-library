@@ -1,11 +1,25 @@
 import bookApi from '../api/model/bookClient';
 
-const fetchBooks = searchText => dispatch => bookApi.search(searchText).then((response) => {
+const fetchBooks = searchText => (dispatch) => {
     dispatch({
-        type: 'FETCH_BOOK_SUCCESS',
-        response,
+        type: 'FETCH_BOOK_REQUEST',
     });
-});
+
+    bookApi.search(searchText).then(
+        (response) => {
+            dispatch({
+                type: 'FETCH_BOOK_SUCCESS',
+                response,
+            });
+        },
+        (error) => {
+            dispatch({
+                type: 'FETCH_BOOK_FAILURE',
+                error,
+            });
+        },
+    );
+};
 
 const fetchBook = id => dispatch => bookApi.getById(id).then((response) => {
     dispatch({

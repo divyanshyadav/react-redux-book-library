@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 import axios from 'axios';
 
 const client = axios.create({
@@ -14,13 +16,6 @@ client.interceptors.request.use(
     error => Promise.reject(error),
 );
 
-client.interceptors.response.use(
-    response => response.data,
-    (error) => {
-        alert(`API Error: ${error.message}`);
-        console.error(error);
-        return Promise.reject(error);
-    },
-);
+client.interceptors.response.use(response => response.data, error => Promise.reject(error));
 
 export default client;

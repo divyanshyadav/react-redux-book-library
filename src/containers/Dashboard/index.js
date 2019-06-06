@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 
 import actions from '../../actions';
-import { getAllBooks } from '../../reducers';
+import { getAllBooks, isLoading, getErrorMessage } from '../../reducers';
 
 import BookModel from '../../models/Book';
 
 import BookList from '../../components/BookList';
 import Button from '../../components/Button';
 import SearchBox from '../../components/SearchBox';
+import Loading from '../../components/Loading';
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -21,7 +22,7 @@ class Dashboard extends Component {
 
     render() {
         const {
-            books, searchedText, deleteBook, history, fetchBooks,
+            books, searchedText, deleteBook, history, fetchBooks, loading, error,
         } = this.props;
         return (
             <div className="dashboard__container">
@@ -43,6 +44,8 @@ class Dashboard extends Component {
                     onBookEditClick={id => history.push(`/book/${id}`)}
                     onBookDeleteClick={id => deleteBook(id)}
                 />
+                <Loading show={loading} />
+                <span>{error}</span>
             </div>
         );
     }
@@ -54,6 +57,8 @@ const mapStateToProps = (state, { history, location }) => {
         books: getAllBooks(state).reverse(),
         searchedText,
         history,
+        loading: isLoading(state),
+        error: getErrorMessage(state),
     };
 };
 
@@ -69,6 +74,8 @@ Dashboard.propTypes = {
     history: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
+    loading: PropTypes.bool.isRequired,
+    error: PropTypes.string.isRequired,
 };
 
 export default withRouter(

@@ -1,4 +1,5 @@
 /* eslint-disable no-case-declarations */
+import { combineReducers } from 'redux';
 
 const books = (state = {}, action) => {
     switch (action.type) {
@@ -23,7 +24,39 @@ const books = (state = {}, action) => {
     }
 };
 
-export default books;
+const loading = (state = false, action) => {
+    switch (action.type) {
+    case 'FETCH_BOOK_SUCCESS':
+        return false;
+    case 'FETCH_BOOK_REQUEST':
+        return true;
+    case 'FETCH_BOOK_FAILURE':
+        return false;
+    default:
+        return state;
+    }
+};
 
-export const getAllBooks = state => Object.values(state);
-export const getBook = (state, id) => state[id];
+const error = (state = '', action) => {
+    switch (action.type) {
+    case 'FETCH_BOOK_SUCCESS':
+        return '';
+    case 'FETCH_BOOK_REQUEST':
+        return '';
+    case 'FETCH_BOOK_FAILURE':
+        return action.error.message;
+    default:
+        return state;
+    }
+};
+
+export default combineReducers({
+    books,
+    loading,
+    error,
+});
+
+export const getAllBooks = state => Object.values(state.books);
+export const getBook = (state, id) => state.books[id];
+export const isLoading = state => state.loading;
+export const getErrorMessage = state => state.error;
